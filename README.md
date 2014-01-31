@@ -1,4 +1,4 @@
-validator
+Validator
 =========
 
 Validator is a JQuery validation plugin for forms. It can validate text, textarea, password, checkbox and select elements.
