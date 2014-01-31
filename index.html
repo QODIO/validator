@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Validator</title>
+		<style>
+			body {
+				font-family: sans-serif;
+			}
+			label {
+				display: block;
+				margin-top: 5px;
+				margin-bottom: 5px;
+				font-size: 12px;
+			}
+			input[type="text"], input[type="password"], input[type="radio"], input[type="checkbox"], select, textarea {
+				margin-bottom: 20px;
+				padding: 5px;
+				border-radius: 3px;
+				border: 1px solid #999;
+			}
+			div.validate-error {
+				color: #f00;
+				font-size: 12px;
+				font-weight: bold;
+			}
+			label.error {
+				color: #f00;
+			}
+			input.error, select.error, textarea.error {
+				border: 1px solid red;
+				background-color: #fff6f6;
+			}
+			form {
+				float: left;
+				margin-right: 40px;
+				margin-bottom: 40px;
+			}
+		</style>
+		<script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+		<script type="text/javascript" src="fm.validator.js"></script>
+		<script>
+			$(function () {
+				$(this).find('input, select, textarea').each(function () {
+					 if ($(this).attr('data-required') != undefined) {
+						 $(this).val('A');
+					 }
+					 if ($(this).attr('data-min') != undefined) {
+						 $(this).val('Abcde');
+					 }
+				 });
+			});
+		</script>
+	</head>
+	<body>
+		<h1>Validater</h1>
+		
+		<form id="form1" class="validator">
+			<div>
+				<button type="submit">Validate</button>
+				<input type="button" value="Validate2" onclick="Validator.validate(document.getElementById('form1'));">
+				<button type="reset">Reset</button>
+			</div>
+
+			<h3>Input [type=text]</h3>
+			<label></label>
+			<input type="text" data-required-if="radio1">
+
+			<label>required</label>
+			<input type="text" data-required>*
+
+			<label>type=email</label>
+			<input type="text" data-type="email">
+
+			<label>type=email required</label>
+			<input type="text" data-type="email" data-required>*
+
+			<label>type=url</label>
+			<input type="text" data-type="url">
+
+			<label>type=url required</label>
+			<input type="text" data-type="url" data-required>*
+
+			<label>type=number</label>
+			<input type="text" data-type="number">
+
+			<label>type=number required</label>
+			<input type="text" data-type="number" data-required>*
+
+			<label>type=digits</label>
+			<input type="text" data-type="digits">
+
+			<label>type=digits required</label>
+			<input type="text" data-type="digits" data-required>*
+
+			<label>min=5</label>
+			<input type="text" data-min="5">
+
+			<label>min=5 max=10</label>
+			<input type="text" data-min="5" data-max="10">
+
+			<label>max=10</label>
+			<input type="text" data-max="10">
+
+			<label>max=10 required</label>
+			<input type="text" data-max="10" data-required>*
+		</form>
+
+		<form id="form2" class="validator">
+			<div>
+				<button type="submit">Validate</button>
+				<input type="button" value="Validate2" onclick="Validator.validate(document.getElementById('form2'));">
+				<button type="reset">Reset</button>
+			</div>
+			
+			<h3>Input [type=password]</h3>
+			<label></label>
+			<input type="password" data-match="passwordRepeat1">
+			<label>repeat</label>
+			<input type="password" id="passwordRepeat1">
+
+			<label>required</label>
+			<input type="password" data-match="passwordRepeat2" data-required>*
+			<label>repeat required</label>
+			<input type="password" id="passwordRepeat2">*
+
+			<label>min=5</label>
+			<input type="password" data-match="passwordRepeat3" data-min="5">
+			<label>repeat min=5</label>
+			<input type="password" id="passwordRepeat3">*
+
+			<label>min=5 max=10</label>
+			<input type="password" data-match="passwordRepeat4" data-min="5" data-max="10">
+			<label>repeat min=5 max=10</label>
+			<input type="password" id="passwordRepeat4">*
+
+			<label>max=10</label>
+			<input type="password" data-match="passwordRepeat5" data-max="10">
+			<label>repeat max=10</label>
+			<input type="password" id="passwordRepeat5">*
+
+			<label>max=10 required</label>
+			<input type="password" data-match="passwordRepeat6" data-max="10" data-required>*
+			<label>repeat max=10 required</label>
+			<input type="password" id="passwordRepeat6">*
+		</form>
+
+		<form id="form3" class="validator">
+			<div>
+				<button type="submit">Validate</button>
+				<input type="button" value="Validate2" onclick="Validator.validate(document.getElementById('form3'));">
+				<button type="reset">Reset</button>
+			</div>
+			
+			<h3>Input [type=radio]</h3>
+			<label>required</label>
+			<label><input type="radio" name="radioButtons" data-required value=""> </label>
+			<label><input type="radio" name="radioButtons" id="radio1" value="1"> 1</label>
+			<label><input type="radio" name="radioButtons" value="2"> 2</label>
+			<label><input type="radio" name="radioButtons" value="3"> 3</label>
+
+			<label>required on all</label>
+			<label><input type="radio" name="radioButtons" data-required value=""> </label>
+			<label><input type="radio" name="radioButtons" data-required value="1"> 1</label>
+			<label><input type="radio" name="radioButtons" data-required value="2"> 2</label>
+			<label><input type="radio" name="radioButtons" data-required value="3"> 3</label>
+
+			<h3>Input [type=checkbox]</h3>
+			<label><input type="checkbox"> no validation</label>
+			<label><input type="checkbox" data-required> required</label>
+
+			<h3>Select</h3>
+			<label></label>
+			<select>
+				<option value="">no value</option>
+				<option value="1">Value 1</option>
+				<option value="2">Value 2</option>
+			</select>
+			<label>required</label>
+			<select data-required>
+				<option value="">no value</option>
+				<option value="1">Value 1</option>
+				<option value="2">Value 2</option>
+			</select>
+		</form>
+
+		<form id="form4" class="validator">
+			<div>
+				<button type="submit">Validate</button>
+				<input type="button" value="Validate2" onclick="Validator.validate(document.getElementById('form4'));">
+				<button type="reset">Reset</button>
+			</div>
+			
+			<h3>Textarea</h3>
+			<label></label>
+			<textarea></textarea>
+
+			<label>required</label>
+			<textarea data-required></textarea>
+
+			<label>min=5</label>
+			<textarea data-min="5"></textarea>
+
+			<label>min=5 max=10</label>
+			<textarea data-min="5" data-max="10"></textarea>
+
+			<label>max=10</label>
+			<textarea data-max="10"></textarea>
+
+			<label>max=10 required *</label>
+			<textarea data-max="10" data-required></textarea>
+		</form>
+
+	</body>
+</html>
