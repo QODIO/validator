@@ -44,14 +44,7 @@
 		<script type="text/javascript" src="fm.validator.js"></script>
 		<script>
 			$(function () {
-				$(this).find('input, select, textarea').each(function () {
-					 if ($(this).attr('data-required') != undefined) {
-						 $(this).val('A');
-					 }
-					 if ($(this).attr('data-min') != undefined) {
-						 $(this).val('Abcde');
-					 }
-				 });
+				Validator.language = 'en';
 			});
 		</script>
 	</head>
