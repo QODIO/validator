@@ -39,13 +39,13 @@ Supported validations
 
 #### Text inputs:
 | Attribute				| Valid values											| Description
-|-----------------------|-------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| data-require			| no value												| If this is set, then the input will require some content 																										|
-| data-required-if		| element id											| If set to an id of a checkbox, then it will only validate if said checkbox is checked																			|
-| data-min=0-9			| `0-9`													| The minimum length of the input																																|
-| data-max=0-9			| `0-9`													| The maximum length of the input																																|
-| data-type				| `email`, `url`, `number`, `digits`					| **email** are **url** are self explanatory, **number** are the characters `0-9` `+` `-` `.` `,`, **digits** are the characters `0-9` only						|
-| data-error-position	| `before`, `after`, `before-parent`, `after-parent`	| by default the error messages will appear before the input element in the DOM, but you can also set it to appear `after`, `before-parent`, and `after-parent`	|
+|-----------------------|-------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| data-require			| no value												| If this is set, then the input will require some content 																																		|
+| data-required-if		| element id											| If set to an id of a checkbox, then it will only validate if said checkbox is checked																											|
+| data-min=0-9			| `0-9`													| The minimum length of the input																																								|
+| data-max=0-9			| `0-9`													| The maximum length of the input																																								|
+| data-type				| `email`, `url`, `number`, `digits`					| **email** are **url** are self explanatory, **number** are the characters `0-9` `+` `-` `.` `,`, **digits** are the characters `0-9` only														|
+| data-error-position	| `before`, `after`, `before-`tagname, `after-`tagname	| By default the error messages will appear before the input element in the DOM, but you can also set it to appear `after`, and `before` and `after` the closest parent matching the tagname	|
 <br>
 
 #### Password inputs:
