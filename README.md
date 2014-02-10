@@ -52,7 +52,7 @@ Supported validations
 #### Text inputs:
 Attribute				| Valid values												| Description
 ------------------------|-----------------------------------------------------------|---------------------------------------------------------------
-data-require			| no value													| If this is set, then the input will require some content
+data-required			| no value													| If this is set, then the input will require some content
 data-required-if		| element id												| If set to an id of a checkbox, then it will only validate if said checkbox is checked
 data-min=0-9			| `0-9`														| The minimum length of the input
 data-max=0-9			| `0-9`														| The maximum length of the input
