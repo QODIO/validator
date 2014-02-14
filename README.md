@@ -63,7 +63,7 @@ data-error-position		| `before`, `after`, `before-{tagname}`, `after-{tagname}`	
 #### Password inputs:
 Attribute				| Valid values												| Description
 ------------------------|-----------------------------------------------------------|---------------------------------------------------------------
-data-require			| no value													| If this is set, then the input will require some content
+data-required			| no value													| If this is set, then the input will require some content
 data-required-if		| element id												| If set to an id of a checkbox, then it will only validate if said checkbox is checked
 data-min=0-9			| `0-9`														| The minimum length of the input
 data-max=0-9			| `0-9`														| The maximum length of the input
@@ -74,7 +74,7 @@ data-error-position		| `before`, `after`, `before-{tagname}`, `after-{tagname}`	
 #### Checkbox inputs:
 Attribute				| Valid values												| Description
 ------------------------|-----------------------------------------------------------|---------------------------------------------------------------
-data-require			| no value													| If this is set, then the input will require some content
+data-required			| no value													| If this is set, then the input will require some content
 data-required-if		| element id												| If set to an id of a checkbox, then it will only validate if said checkbox is checked
 data-error-position		| `before`, `after`, `before-{tagname}`, `after-{tagname}`	| By default the error messages will appear before the input element in the DOM, but you can also set it to appear `after`. If neede then you can also set it t be `before` or `after` the closest parent matching the tagname specified after the dash `-`
 <br>
@@ -82,7 +82,7 @@ data-error-position		| `before`, `after`, `before-{tagname}`, `after-{tagname}`	
 #### Select inputs:
 Attribute				| Valid values												| Description
 ------------------------|-----------------------------------------------------------|---------------------------------------------------------------
-data-require			| no value													| If this is set, then the input will require some content
+data-required			| no value													| If this is set, then the input will require some content
 data-required-if		| element id												| If set to an id of a checkbox, then it will only validate if said checkbox is checked
 data-error-position		| `before`, `after`, `before-{tagname}`, `after-{tagname}`	| By default the error messages will appear before the input element in the DOM, but you can also set it to appear `after`. If neede then you can also set it t be `before` or `after` the closest parent matching the tagname specified after the dash `-`
 <br>
@@ -90,7 +90,7 @@ data-error-position		| `before`, `after`, `before-{tagname}`, `after-{tagname}`	
 #### Textareas:
 Attribute				| Valid values												| Description
 ------------------------|-----------------------------------------------------------|---------------------------------------------------------------
-data-require			| no value													| If this is set, then the textarea will require some content
+data-required			| no value													| If this is set, then the textarea will require some content
 data-required-if		| element id												| If set to an id of a checkbox, then it will only validate if said checkbox is checked
 data-min=0-9			| `0-9`														| The minimum length of the textarea
 data-max=0-9			| `0-9`														| The maximum length of the textarea
