@@ -40,7 +40,7 @@
 				margin-bottom: 40px;
 			}
 		</style>
-		<script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+		<script type="text/javascript" src="jquery-1.11.0.min.js"></script>
 		<script type="text/javascript" src="fm.validator.js"></script>
 		<script>
 			$(function () {
@@ -54,16 +54,15 @@
 		<form id="form1" class="validator">
 			<div>
 				<button type="submit">Validate</button>
-				<input type="button" value="Validate2" onclick="Validator.validate(document.getElementById('form1'));">
-				<button type="reset">Reset</button>
+				<button type="reset" onclick="Validator.removeErrors(document.getElementById('form1'));">Reset</button>
 			</div>
 
 			<h3>Input [type=text]</h3>
 			<label></label>
-			<input type="text" data-required-if="radio1">
+			<input type="text" data-required-if="test1" data-required-if-value="yessir">
 
 			<label>required</label>
-			<input type="text" data-required>*
+			<input type="text" data-required id="test1">*
 
 			<label>type=email</label>
 			<input type="text" data-type="email">
@@ -105,8 +104,7 @@
 		<form id="form2" class="validator">
 			<div>
 				<button type="submit">Validate</button>
-				<input type="button" value="Validate2" onclick="Validator.validate(document.getElementById('form2'));">
-				<button type="reset">Reset</button>
+				<button type="reset" onclick="Validator.removeErrors(document.getElementById('form2'));">Reset</button>
 			</div>
 			
 			<h3>Input [type=password]</h3>
@@ -144,22 +142,21 @@
 		<form id="form3" class="validator">
 			<div>
 				<button type="submit">Validate</button>
-				<input type="button" value="Validate2" onclick="Validator.validate(document.getElementById('form3'));">
-				<button type="reset">Reset</button>
+				<button type="reset" onclick="Validator.removeErrors(document.getElementById('form3'));">Reset</button>
 			</div>
 			
 			<h3>Input [type=radio]</h3>
 			<label>required</label>
-			<label><input type="radio" name="radioButtons" data-required value=""> </label>
-			<label><input type="radio" name="radioButtons" id="radio1" value="1"> 1</label>
-			<label><input type="radio" name="radioButtons" value="2"> 2</label>
-			<label><input type="radio" name="radioButtons" value="3"> 3</label>
+			<label><input type="radio" name="radioButtons" id="radio1_0" data-required value=""> </label>
+			<label><input type="radio" name="radioButtons" id="radio1_1" value="1"> 1</label>
+			<label><input type="radio" name="radioButtons" id="radio1_3" value="2"> 2</label>
+			<label><input type="radio" name="radioButtons" id="radio1_4" value="3"> 3</label>
 
 			<label>required on all</label>
-			<label><input type="radio" name="radioButtons" data-required value=""> </label>
-			<label><input type="radio" name="radioButtons" data-required value="1"> 1</label>
-			<label><input type="radio" name="radioButtons" data-required value="2"> 2</label>
-			<label><input type="radio" name="radioButtons" data-required value="3"> 3</label>
+			<label><input type="radio" name="radioButtons" id="radio2_0" data-required value=""> </label>
+			<label><input type="radio" name="radioButtons" id="radio2_1" data-required value="1"> 1</label>
+			<label><input type="radio" name="radioButtons" id="radio2_2" data-required value="2"> 2</label>
+			<label><input type="radio" name="radioButtons" id="radio2_3" data-required value="3"> 3</label>
 
 			<h3>Input [type=checkbox]</h3>
 			<label><input type="checkbox"> no validation</label>
@@ -183,8 +180,7 @@
 		<form id="form4" class="validator">
 			<div>
 				<button type="submit">Validate</button>
-				<input type="button" value="Validate2" onclick="Validator.validate(document.getElementById('form4'));">
-				<button type="reset">Reset</button>
+				<button type="reset" onclick="Validator.removeErrors(document.getElementById('form4'));">Reset</button>
 			</div>
 			
 			<h3>Textarea</h3>

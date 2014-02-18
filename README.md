@@ -53,7 +53,8 @@ Supported validations
 Attribute				| Valid values												| Description
 ------------------------|-----------------------------------------------------------|---------------------------------------------------------------
 data-required			| no value													| If this is set, then the input will require some content
-data-required-if		| element id												| If set to an id of a checkbox, then it will only validate if said checkbox is checked
+data-required-if		| element id												| If set to an id of an element, then it will only be required if said element is checked or has the value of `data-required-if-value` 
+data-required-if-value	| element value												| If `data-required-if` is set to an element id, then it will only be required if said element has said value
 data-min=0-9			| `0-9`														| The minimum length of the input
 data-max=0-9			| `0-9`														| The maximum length of the input
 data-type				| `email`, `url`, `number`, `digits`						| **email** are **url** are self explanatory, **number** are the characters `0-9` `+` `-` `.` `,`, **digits** are the characters `0-9` only
@@ -64,7 +65,8 @@ data-error-position		| `before`, `after`, `before-{tagname}`, `after-{tagname}`	
 Attribute				| Valid values												| Description
 ------------------------|-----------------------------------------------------------|---------------------------------------------------------------
 data-required			| no value													| If this is set, then the input will require some content
-data-required-if		| element id												| If set to an id of a checkbox, then it will only validate if said checkbox is checked
+data-required-if		| element id												| If set to an id of an element, then it will only validate if said element is checked or has the value of `data-required-if-value` 
+data-required-if-value	| element value												| If `data-required-if` is set to an element id, then it will only validate if said element has said value
 data-min=0-9			| `0-9`														| The minimum length of the input
 data-max=0-9			| `0-9`														| The maximum length of the input
 data-match				| element id												| If set to an id of another input element, it will match the contents against that element
@@ -75,7 +77,8 @@ data-error-position		| `before`, `after`, `before-{tagname}`, `after-{tagname}`	
 Attribute				| Valid values												| Description
 ------------------------|-----------------------------------------------------------|---------------------------------------------------------------
 data-required			| no value													| If this is set, then the input will require some content
-data-required-if		| element id												| If set to an id of a checkbox, then it will only validate if said checkbox is checked
+data-required-if		| element id												| If set to an id of an element, then it will only validate if said element is checked or has the value of `data-required-if-value` 
+data-required-if-value	| element value												| If `data-required-if` is set to an element id, then it will only validate if said element has said value
 data-error-position		| `before`, `after`, `before-{tagname}`, `after-{tagname}`	| By default the error messages will appear before the input element in the DOM, but you can also set it to appear `after`. If neede then you can also set it t be `before` or `after` the closest parent matching the tagname specified after the dash `-`
 <br>
 
@@ -83,7 +86,8 @@ data-error-position		| `before`, `after`, `before-{tagname}`, `after-{tagname}`	
 Attribute				| Valid values												| Description
 ------------------------|-----------------------------------------------------------|---------------------------------------------------------------
 data-required			| no value													| If this is set, then the input will require some content
-data-required-if		| element id												| If set to an id of a checkbox, then it will only validate if said checkbox is checked
+data-required-if		| element id												| If set to an id of an element, then it will only validate if said element is checked or has the value of `data-required-if-value` 
+data-required-if-value	| element value												| If `data-required-if` is set to an element id, then it will only validate if said element has said value
 data-error-position		| `before`, `after`, `before-{tagname}`, `after-{tagname}`	| By default the error messages will appear before the input element in the DOM, but you can also set it to appear `after`. If neede then you can also set it t be `before` or `after` the closest parent matching the tagname specified after the dash `-`
 <br>
 
@@ -91,7 +95,8 @@ data-error-position		| `before`, `after`, `before-{tagname}`, `after-{tagname}`	
 Attribute				| Valid values												| Description
 ------------------------|-----------------------------------------------------------|---------------------------------------------------------------
 data-required			| no value													| If this is set, then the textarea will require some content
-data-required-if		| element id												| If set to an id of a checkbox, then it will only validate if said checkbox is checked
+data-required-if		| element id												| If set to an id of an element, then it will only validate if said element is checked or has the value of `data-required-if-value` 
+data-required-if-value	| element value												| If `data-required-if` is set to an element id, then it will only validate if said element has said value
 data-min=0-9			| `0-9`														| The minimum length of the textarea
 data-max=0-9			| `0-9`														| The maximum length of the textarea
 data-type				| `url`														| If type is set to `url`, then a valid url is required

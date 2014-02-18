@@ -1,7 +1,7 @@
 /*
  Validator jQuery Plugin
  Validator is a JQuery validation plugin for forms.
- version 1.3, Jan 31th, 2014
+ version 1.4, Jan 31th, 2014
  by Ingi P. Jacobsen
 
  The MIT License (MIT)
@@ -167,12 +167,12 @@ Validator = {
 			// Input[type=text]
 			if ($(this).is('input') && ($(this).attr('type') == 'text' || $(this).attr('type') == undefined)) {
 				// required
-				if ($(this).attr('data-required') != undefined && $(this).val() == '') {
+				if ($(this).attr('data-required') != undefined && $(this).val() == '' && $(this).attr('data-required-if') == undefined) {
 					Validator.showError(this, Validator.languages[Validator.language].textbox.required);
 					hasErrors = true;
 				}
-				// required-if
-				if ($(this).attr('data-required-if') != undefined && $('#' + $(this).attr('data-required-if')).is(':checked') && $(this).val() == '') {
+				// required-if & required-if-value
+				if ($(this).attr('data-required-if') != undefined && $(this).val() == '' && (($(this).attr('data-required-if-value') == undefined && $('#' + $(this).attr('data-required-if')).is(':checked')) || ($(this).attr('data-required-if-value') != undefined && $('#' + $(this).attr('data-required-if')).val() == $(this).attr('data-required-if-value')))) {
 					Validator.showError(this, Validator.languages[Validator.language].textbox.required);
 					hasErrors = true;
 				}
@@ -225,12 +225,12 @@ Validator = {
 			// Input[type=password]
 			if ($(this).is('input') && $(this).attr('type') == 'password') {
 				// required
-				if ($(this).attr('data-required') != undefined && $(this).val() == '') {
+				if ($(this).attr('data-required') != undefined && $(this).val() == '' && $(this).attr('data-required-if') == undefined) {
 					Validator.showError(this, Validator.languages[Validator.language].password.required);
 					hasErrors = true;
 				}
-				// required-if
-				if ($(this).attr('data-required-if') != undefined && $('#' + $(this).attr('data-required-if')).is(':checked') && $(this).val() == '') {
+				// required-if & required-if-value
+				if ($(this).attr('data-required-if') != undefined && $(this).val() == '' && (($(this).attr('data-required-if-value') == undefined && $('#' + $(this).attr('data-required-if')).is(':checked')) || ($(this).attr('data-required-if-value') != undefined && $('#' + $(this).attr('data-required-if')).val() == $(this).attr('data-required-if-value')))) {
 					Validator.showError(this, Validator.languages[Validator.language].password.required);
 					hasErrors = true;
 				}
@@ -258,12 +258,12 @@ Validator = {
 			// Input[type=checkbox]
 			if ($(this).is('input') && $(this).attr('type') == 'checkbox') {
 				// required
-				if ($(this).attr('data-required') != undefined && !$(this).is(':checked')) {
+				if ($(this).attr('data-required') != undefined && !$(this).is(':checked') && $(this).attr('data-required-if') == undefined) {
 					Validator.showError(this, Validator.languages[Validator.language].checkbox.required);
 					hasErrors = true;
 				}
-				// required-if
-				if ($(this).attr('data-required-if') != undefined && $('#' + $(this).attr('data-required-if')).is(':checked') && !$(this).is(':checked')) {
+				// required-if & required-if-value
+				if ($(this).attr('data-required-if') != undefined && $(this).val() == '' && (($(this).attr('data-required-if-value') == undefined && $('#' + $(this).attr('data-required-if')).is(':checked')) || ($(this).attr('data-required-if-value') != undefined && $('#' + $(this).attr('data-required-if')).val() == $(this).attr('data-required-if-value')))) {
 					Validator.showError(this, Validator.languages[Validator.language].checkbox.required);
 					hasErrors = true;
 				}
@@ -272,12 +272,12 @@ Validator = {
 			// Select
 			if ($(this).is('select')) {
 				// required
-				if ($(this).attr('data-required') != undefined && $(this).val() == '') {
+				if ($(this).attr('data-required') != undefined && $(this).val() == '' && $(this).attr('data-required-if') == undefined) {
 					Validator.showError(this, Validator.languages[Validator.language].select.required);
 					hasErrors = true;
 				}
-				// required-if
-				if ($(this).attr('data-required-if') != undefined && $('#' + $(this).attr('data-required-if')).is(':checked') && $(this).val() == '') {
+				// required-if & required-if-value
+				if ($(this).attr('data-required-if') != undefined && $(this).val() == '' && (($(this).attr('data-required-if-value') == undefined && $('#' + $(this).attr('data-required-if')).is(':checked')) || ($(this).attr('data-required-if-value') != undefined && $('#' + $(this).attr('data-required-if')).val() == $(this).attr('data-required-if-value')))) {
 					Validator.showError(this, Validator.languages[Validator.language].select.required);
 					hasErrors = true;
 				}
@@ -287,12 +287,12 @@ Validator = {
 			// Textarea
 			if ($(this).is('textarea')) {
 				// required
-				if ($(this).attr('data-required') != undefined && $(this).val() == '') {
+				if ($(this).attr('data-required') != undefined && $(this).val() == '' && $(this).attr('data-required-if') == undefined) {
 					Validator.showError(this, Validator.languages[Validator.language].textarea.required);
 					hasErrors = true;
 				}
-				// required-if
-				if ($(this).attr('data-required-if') != undefined && $('#' + $(this).attr('data-required-if')).is(':checked') && $(this).val() == '') {
+				// required-if & required-if-value
+				if ($(this).attr('data-required-if') != undefined && $(this).val() == '' && (($(this).attr('data-required-if-value') == undefined && $('#' + $(this).attr('data-required-if')).is(':checked')) || ($(this).attr('data-required-if-value') != undefined && $('#' + $(this).attr('data-required-if')).val() == $(this).attr('data-required-if-value')))) {
 					Validator.showError(this, Validator.languages[Validator.language].textarea.required);
 					hasErrors = true;
 				}
