@@ -10,7 +10,7 @@ Usage
 -----
 ###### include in head:
 ```html
-<script src="jquery-1.10.2.min.js"></script>
+<script src="jquery-1.11.0.min.js"></script>
 <script src="fm.validator.jquery.js"></script>
 ```
 
