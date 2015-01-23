@@ -15,7 +15,7 @@ Usage
 ```
 
 ###### plugin activation:
-By default when initialized, the plugin will look for any form that contain the class validator, add itself to the submit event of the form, and then look for validator html5 data attributes that indicate what and how it the elements in the form should be validated.
+By default when initialized, the plugin will look for any form that contains the class validator, add itself to the submit event of the form, and then look for validator html5 data attributes that indicate what and how the elements in the form should be validated.
 But you can also validate a form manually, by running the Validator.validate function. Here is an example:
 ```javascript
 if (Validator.validate('#someForm')) {
@@ -23,11 +23,12 @@ if (Validator.validate('#someForm')) {
 	return true;
 } else {
 	alert('The form is NOT valid!');
+	return false;
 }
 ```
 
 ###### html5 data attributes:
-Here is an example of an textbox being required and the content being required to be between 3 and 12 characters.
+Here is an example of a textbox being required and the content being required to be between 3 and 12 characters.
 ```html
 <form method="post" class="validator">
   <input type="text" data-required data-min="3" data-max="12">
