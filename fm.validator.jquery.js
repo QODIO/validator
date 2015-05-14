@@ -1,7 +1,7 @@
 /*
  Validator jQuery Plugin
  Validator is a JQuery validation plugin for forms.
- version 1.5, Jan 31th, 2014
+ version 1.6, Jan 31th, 2014
  by Ingi P. Jacobsen
 
  The MIT License (MIT)
@@ -156,174 +156,177 @@ var Validator = {
 			}
 		}
 	},
-	validate: function (form) {
+	validate: function (form, onlyVisible) {
 		var hasErrors = false;
 		var firstErrorElement = null;
+		onlyVisible = typeof onlyVisible !== 'undefined' ? onlyVisible : false;
 
 		Validator.removeErrors(form);
 
 		$(form).find('input, select, textarea').each(function () {
-			var regex = null;
-			// Input[type=text]
-			if ($(this).is('input') && ($(this).attr('type') == 'text' || $(this).attr('type') == undefined)) {
-				// required
-				if ($(this).attr('data-required') != undefined && $(this).val() == '' && $(this).attr('data-required-if') == undefined) {
-					Validator.showError(this, Validator.languages[Validator.language].textbox.required);
-					hasErrors = true;
-				}
-				// required-if & required-if-value
-				if ($(this).attr('data-required-if') != undefined && $(this).val() == '' && (($(this).attr('data-required-if-value') == undefined && $('#' + $(this).attr('data-required-if')).is(':checked')) || ($(this).attr('data-required-if-value') != undefined && $('#' + $(this).attr('data-required-if')).val() == $(this).attr('data-required-if-value')))) {
-					Validator.showError(this, Validator.languages[Validator.language].textbox.required);
-					hasErrors = true;
-				}
-				// min
-				if ($(this).attr('data-min') != undefined && $(this).val().length < parseFloat($(this).attr('data-min')) && $(this).val().length != 0) {
-					Validator.showError(this, Validator.languages[Validator.language].textbox.min.replace('{characters}', $(this).attr('data-min')));
-					hasErrors = true;
-				}
-				// max
-				if ($(this).attr('data-max') != undefined && $(this).val().length > parseFloat($(this).attr('data-max'))) {
-					Validator.showError(this, Validator.languages[Validator.language].textbox.max.replace('{characters}', $(this).attr('data-min')));
-					hasErrors = true;
-				}
+			if (!onlyVisible || $(this).is(':visible')) {
+				var regex = null;
+				// Input[type=text]
+				if ($(this).is('input') && ($(this).attr('type') == 'text' || $(this).attr('type') == undefined)) {
+					// required
+					if ($(this).attr('data-required') != undefined && $(this).val() == '' && $(this).attr('data-required-if') == undefined) {
+						Validator.showError(this, Validator.languages[Validator.language].textbox.required);
+						hasErrors = true;
+					}
+					// required-if & required-if-value
+					if ($(this).attr('data-required-if') != undefined && $(this).val() == '' && (($(this).attr('data-required-if-value') == undefined && $('#' + $(this).attr('data-required-if')).is(':checked')) || ($(this).attr('data-required-if-value') != undefined && $('#' + $(this).attr('data-required-if')).val() == $(this).attr('data-required-if-value')))) {
+						Validator.showError(this, Validator.languages[Validator.language].textbox.required);
+						hasErrors = true;
+					}
+					// min
+					if ($(this).attr('data-min') != undefined && $(this).val().length < parseFloat($(this).attr('data-min')) && $(this).val().length != 0) {
+						Validator.showError(this, Validator.languages[Validator.language].textbox.min.replace('{characters}', $(this).attr('data-min')));
+						hasErrors = true;
+					}
+					// max
+					if ($(this).attr('data-max') != undefined && $(this).val().length > parseFloat($(this).attr('data-max'))) {
+						Validator.showError(this, Validator.languages[Validator.language].textbox.max.replace('{characters}', $(this).attr('data-min')));
+						hasErrors = true;
+					}
 
-				// patterns
-				if ($(this).attr('data-type') != undefined) {
-					switch ($(this).attr('data-type')) {
-						case 'email':
-							regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-							if (!regex.test($(this).val()) && $(this).val() != '') {
-								Validator.showError(this, Validator.languages[Validator.language].textbox.email);
-								hasErrors = true;
-							}
-							break;
-						case 'url':
-							regex = /^(https?:\/\/)?((([a-z\d]([a-z\d-]*[a-z\d])*)\.)+[a-z]{2,}|((\d{1,3}\.){3}\d{1,3}))(\:\d+)?(\/[-a-z\d%_.~+]*)*(\?[;&a-z\d%_{},.~+=-]*)?(\#[-a-z\d_]*)?$/i;
-							if ($(this).val().substr(0, 1) !== '/' && !regex.test($(this).val().replace('_', '')) && $(this).val() != '') {
-								Validator.showError(this, Validator.languages[Validator.language].textbox.url);
-								hasErrors = true;
-							}
-							break;
-						case 'number':
-							regex = /^\s*(\+|-)?((\d+([\.,]\d+)?)|([\.,]\d+))\s*$/;
-							if (!regex.test($(this).val()) && $(this).val() != '') {
-								Validator.showError(this, Validator.languages[Validator.language].textbox.number);
-								hasErrors = true;
-							}
-							break;
-						case 'digits':
-							regex = /^\s*\d+\s*$/;
-							if (!regex.test($(this).val()) && $(this).val() != '') {
-								Validator.showError(this, Validator.languages[Validator.language].textbox.digits);
-								hasErrors = true;
-							}
-							break;
+					// patterns
+					if ($(this).attr('data-type') != undefined) {
+						switch ($(this).attr('data-type')) {
+							case 'email':
+								regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+								if (!regex.test($(this).val()) && $(this).val() != '') {
+									Validator.showError(this, Validator.languages[Validator.language].textbox.email);
+									hasErrors = true;
+								}
+								break;
+							case 'url':
+								regex = /^(https?:\/\/)?((([a-z\d]([a-z\d-]*[a-z\d])*)\.)+[a-z]{2,}|((\d{1,3}\.){3}\d{1,3}))(\:\d+)?(\/[-a-z\d%_.~+]*)*(\?[;&a-z\d%_{},.~+=-]*)?(\#[-a-z\d_]*)?$/i;
+								if ($(this).val().substr(0, 1) !== '/' && !regex.test($(this).val().replace('_', '')) && $(this).val() != '') {
+									Validator.showError(this, Validator.languages[Validator.language].textbox.url);
+									hasErrors = true;
+								}
+								break;
+							case 'number':
+								regex = /^\s*(\+|-)?((\d+([\.,]\d+)?)|([\.,]\d+))\s*$/;
+								if (!regex.test($(this).val()) && $(this).val() != '') {
+									Validator.showError(this, Validator.languages[Validator.language].textbox.number);
+									hasErrors = true;
+								}
+								break;
+							case 'digits':
+								regex = /^\s*\d+\s*$/;
+								if (!regex.test($(this).val()) && $(this).val() != '') {
+									Validator.showError(this, Validator.languages[Validator.language].textbox.digits);
+									hasErrors = true;
+								}
+								break;
+						}
 					}
 				}
-			}
 
-			// Input[type=password]
-			if ($(this).is('input') && $(this).attr('type') == 'password') {
-				// required
-				if ($(this).attr('data-required') != undefined && $(this).val() == '' && $(this).attr('data-required-if') == undefined) {
-					Validator.showError(this, Validator.languages[Validator.language].password.required);
-					hasErrors = true;
-				}
-				// required-if & required-if-value
-				if ($(this).attr('data-required-if') != undefined && $(this).val() == '' && (($(this).attr('data-required-if-value') == undefined && $('#' + $(this).attr('data-required-if')).is(':checked')) || ($(this).attr('data-required-if-value') != undefined && $('#' + $(this).attr('data-required-if')).val() == $(this).attr('data-required-if-value')))) {
-					Validator.showError(this, Validator.languages[Validator.language].password.required);
-					hasErrors = true;
-				}
-				// min
-				if ($(this).attr('data-min') != undefined && $(this).val().length < parseFloat($(this).attr('data-min')) && $(this).val().length != 0) {
-					Validator.showError(this, Validator.languages[Validator.language].password.min.replace('{characters}', $(this).attr('data-min')));
-					hasErrors = true;
-				}
-				// max
-				if ($(this).attr('data-max') != undefined && $(this).val().length > parseFloat($(this).attr('data-max'))) {
-					Validator.showError(this, Validator.languages[Validator.language].password.max.replace('{characters}', $(this).attr('data-min')));
-					hasErrors = true;
-				}
-				// match
-				if ($(this).attr('data-match') != undefined && $(this).val() != $('#' + $(this).attr('data-match')).val()) {
-					Validator.showError(this, Validator.languages[Validator.language].password.match);
-					hasErrors = true;
-				}
-			}
-
-			// Input[type=radio]
-			if ($(this).is('input') && $(this).attr('type') == 'radio') {
-			}
-
-			// Input[type=checkbox]
-			if ($(this).is('input') && $(this).attr('type') == 'checkbox') {
-				// required
-				if ($(this).attr('data-required') != undefined && !$(this).is(':checked') && $(this).attr('data-required-if') == undefined) {
-					Validator.showError(this, Validator.languages[Validator.language].checkbox.required);
-					hasErrors = true;
-				}
-				// required-if & required-if-value
-				if ($(this).attr('data-required-if') != undefined && $(this).val() == '' && (($(this).attr('data-required-if-value') == undefined && $('#' + $(this).attr('data-required-if')).is(':checked')) || ($(this).attr('data-required-if-value') != undefined && $('#' + $(this).attr('data-required-if')).val() == $(this).attr('data-required-if-value')))) {
-					Validator.showError(this, Validator.languages[Validator.language].checkbox.required);
-					hasErrors = true;
-				}
-			}
-
-			// Select
-			if ($(this).is('select')) {
-				// required
-				if ($(this).attr('data-required') != undefined && $(this).val() == '' && $(this).attr('data-required-if') == undefined) {
-					Validator.showError(this, Validator.languages[Validator.language].select.required);
-					hasErrors = true;
-				}
-				// required-if & required-if-value
-				if ($(this).attr('data-required-if') != undefined && $(this).val() == '' && (($(this).attr('data-required-if-value') == undefined && $('#' + $(this).attr('data-required-if')).is(':checked')) || ($(this).attr('data-required-if-value') != undefined && $('#' + $(this).attr('data-required-if')).val() == $(this).attr('data-required-if-value')))) {
-					Validator.showError(this, Validator.languages[Validator.language].select.required);
-					hasErrors = true;
-				}
-
-			}
-
-			// Textarea
-			if ($(this).is('textarea')) {
-				// required
-				if ($(this).attr('data-required') != undefined && $(this).val() == '' && $(this).attr('data-required-if') == undefined) {
-					Validator.showError(this, Validator.languages[Validator.language].textarea.required);
-					hasErrors = true;
-				}
-				// required-if & required-if-value
-				if ($(this).attr('data-required-if') != undefined && $(this).val() == '' && (($(this).attr('data-required-if-value') == undefined && $('#' + $(this).attr('data-required-if')).is(':checked')) || ($(this).attr('data-required-if-value') != undefined && $('#' + $(this).attr('data-required-if')).val() == $(this).attr('data-required-if-value')))) {
-					Validator.showError(this, Validator.languages[Validator.language].textarea.required);
-					hasErrors = true;
-				}
-				// min
-				if ($(this).attr('data-min') != undefined && $(this).val().length < parseFloat($(this).attr('data-min')) && $(this).val().length != 0) {
-					Validator.showError(this, Validator.languages[Validator.language].textarea.min.replace('{characters}', $(this).attr('data-min')));
-					hasErrors = true;
-				}
-				// max
-				if ($(this).attr('data-max') != undefined && $(this).val().length > parseFloat($(this).attr('data-max'))) {
-					Validator.showError(this, Validator.languages[Validator.language].textarea.max.replace('{characters}', $(this).attr('data-min')));
-					hasErrors = true;
-				}
-				// patterns
-				if ($(this).attr('data-type') != undefined) {
-					switch ($(this).attr('data-type')) {
-						case 'url':
-							regex = /^(https?:\/\/)?((([a-z\d]([a-z\d-]*[a-z\d])*)\.)+[a-z]{2,}|((\d{1,3}\.){3}\d{1,3}))(\:\d+)?(\/[-a-z\d%_.~+]*)*(\?[;&a-z\d%_{},.~+=-]*)?(\#[-a-z\d_]*)?$/i;
-							if (!regex.test($(this).val()) && $(this).val() != '') {
-								Validator.showError(this, Validator.languages[Validator.language].textarea.url);
-								hasErrors = true;
-							}
-							break;
+				// Input[type=password]
+				if ($(this).is('input') && $(this).attr('type') == 'password') {
+					// required
+					if ($(this).attr('data-required') != undefined && $(this).val() == '' && $(this).attr('data-required-if') == undefined) {
+						Validator.showError(this, Validator.languages[Validator.language].password.required);
+						hasErrors = true;
+					}
+					// required-if & required-if-value
+					if ($(this).attr('data-required-if') != undefined && $(this).val() == '' && (($(this).attr('data-required-if-value') == undefined && $('#' + $(this).attr('data-required-if')).is(':checked')) || ($(this).attr('data-required-if-value') != undefined && $('#' + $(this).attr('data-required-if')).val() == $(this).attr('data-required-if-value')))) {
+						Validator.showError(this, Validator.languages[Validator.language].password.required);
+						hasErrors = true;
+					}
+					// min
+					if ($(this).attr('data-min') != undefined && $(this).val().length < parseFloat($(this).attr('data-min')) && $(this).val().length != 0) {
+						Validator.showError(this, Validator.languages[Validator.language].password.min.replace('{characters}', $(this).attr('data-min')));
+						hasErrors = true;
+					}
+					// max
+					if ($(this).attr('data-max') != undefined && $(this).val().length > parseFloat($(this).attr('data-max'))) {
+						Validator.showError(this, Validator.languages[Validator.language].password.max.replace('{characters}', $(this).attr('data-min')));
+						hasErrors = true;
+					}
+					// match
+					if ($(this).attr('data-match') != undefined && $(this).val() != $('#' + $(this).attr('data-match')).val()) {
+						Validator.showError(this, Validator.languages[Validator.language].password.match);
+						hasErrors = true;
 					}
 				}
-			}
 
-			// Focus first element with error
-			if (hasErrors && firstErrorElement == null) {
-				firstErrorElement = this;
-				$(this).focus();
+				// Input[type=radio]
+				if ($(this).is('input') && $(this).attr('type') == 'radio') {
+				}
+
+				// Input[type=checkbox]
+				if ($(this).is('input') && $(this).attr('type') == 'checkbox') {
+					// required
+					if ($(this).attr('data-required') != undefined && !$(this).is(':checked') && $(this).attr('data-required-if') == undefined) {
+						Validator.showError(this, Validator.languages[Validator.language].checkbox.required);
+						hasErrors = true;
+					}
+					// required-if & required-if-value
+					if ($(this).attr('data-required-if') != undefined && $(this).val() == '' && (($(this).attr('data-required-if-value') == undefined && $('#' + $(this).attr('data-required-if')).is(':checked')) || ($(this).attr('data-required-if-value') != undefined && $('#' + $(this).attr('data-required-if')).val() == $(this).attr('data-required-if-value')))) {
+						Validator.showError(this, Validator.languages[Validator.language].checkbox.required);
+						hasErrors = true;
+					}
+				}
+
+				// Select
+				if ($(this).is('select')) {
+					// required
+					if ($(this).attr('data-required') != undefined && $(this).val() == '' && $(this).attr('data-required-if') == undefined) {
+						Validator.showError(this, Validator.languages[Validator.language].select.required);
+						hasErrors = true;
+					}
+					// required-if & required-if-value
+					if ($(this).attr('data-required-if') != undefined && $(this).val() == '' && (($(this).attr('data-required-if-value') == undefined && $('#' + $(this).attr('data-required-if')).is(':checked')) || ($(this).attr('data-required-if-value') != undefined && $('#' + $(this).attr('data-required-if')).val() == $(this).attr('data-required-if-value')))) {
+						Validator.showError(this, Validator.languages[Validator.language].select.required);
+						hasErrors = true;
+					}
+
+				}
+
+				// Textarea
+				if ($(this).is('textarea')) {
+					// required
+					if ($(this).attr('data-required') != undefined && $(this).val() == '' && $(this).attr('data-required-if') == undefined) {
+						Validator.showError(this, Validator.languages[Validator.language].textarea.required);
+						hasErrors = true;
+					}
+					// required-if & required-if-value
+					if ($(this).attr('data-required-if') != undefined && $(this).val() == '' && (($(this).attr('data-required-if-value') == undefined && $('#' + $(this).attr('data-required-if')).is(':checked')) || ($(this).attr('data-required-if-value') != undefined && $('#' + $(this).attr('data-required-if')).val() == $(this).attr('data-required-if-value')))) {
+						Validator.showError(this, Validator.languages[Validator.language].textarea.required);
+						hasErrors = true;
+					}
+					// min
+					if ($(this).attr('data-min') != undefined && $(this).val().length < parseFloat($(this).attr('data-min')) && $(this).val().length != 0) {
+						Validator.showError(this, Validator.languages[Validator.language].textarea.min.replace('{characters}', $(this).attr('data-min')));
+						hasErrors = true;
+					}
+					// max
+					if ($(this).attr('data-max') != undefined && $(this).val().length > parseFloat($(this).attr('data-max'))) {
+						Validator.showError(this, Validator.languages[Validator.language].textarea.max.replace('{characters}', $(this).attr('data-min')));
+						hasErrors = true;
+					}
+					// patterns
+					if ($(this).attr('data-type') != undefined) {
+						switch ($(this).attr('data-type')) {
+							case 'url':
+								regex = /^(https?:\/\/)?((([a-z\d]([a-z\d-]*[a-z\d])*)\.)+[a-z]{2,}|((\d{1,3}\.){3}\d{1,3}))(\:\d+)?(\/[-a-z\d%_.~+]*)*(\?[;&a-z\d%_{},.~+=-]*)?(\#[-a-z\d_]*)?$/i;
+								if (!regex.test($(this).val()) && $(this).val() != '') {
+									Validator.showError(this, Validator.languages[Validator.language].textarea.url);
+									hasErrors = true;
+								}
+								break;
+						}
+					}
+				}
+
+				// Focus first element with error
+				if (hasErrors && firstErrorElement == null) {
+					firstErrorElement = this;
+					$(this).focus();
+				}
 			}
 		});
 		return !hasErrors;
@@ -352,7 +355,12 @@ var Validator = {
 $(function () {
 	$('form.validator').each(function () {
 		$(this).submit(function () {
-			return Validator.validate(this);
+			return Validator.validate(this, false);
+		});
+	});
+	$('form.validator-onlyvisible').each(function () {
+		$(this).submit(function () {
+			return Validator.validate(this, true);
 		});
 	});
 });
