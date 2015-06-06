@@ -1,7 +1,7 @@
 /*
  Validator jQuery Plugin
  Validator is a JQuery validation plugin for forms.
- version 1.6, Jan 31th, 2014
+ version 1.7, Jan 31th, 2014
  by Ingi P. Jacobsen
 
  The MIT License (MIT)
@@ -75,7 +75,7 @@ var Validator = {
 				required: 'Dette felt skal udfyldes',
 				min: 'Dette felt skal være mindst {characters} tegn',
 				max: 'Dette felt skal være højst {characters} tegn',
-				match: 'Kodeordene er ikke ens'
+				match: 'Adgangskoderne er ikke ens'
 			},
 			radio: {
 			},
@@ -123,16 +123,16 @@ var Validator = {
 				url: 'Website is not valid'
 			}
 		}
-	}, 
+	},
 	showError: function (element, text) {
 		if (!$(element).hasClass(Validator.elementErrorClass)) {
 			var error = document.createElement('div');
 			$(error).addClass('validator-error').html(text);
-			
+
 			if ($(element).attr('data-error-position') == undefined) {
 				var errorPosition = 'before';
 				if ($(this).is('input') && $(this).attr('type') == 'checkbox') {
-					 errorPosition = 'before label';
+					errorPosition = 'before label';
 				}
 			} else {
 				errorPosition = $(element).attr('data-error-position');
@@ -146,11 +146,18 @@ var Validator = {
 			}
 			if (attrValue[0] == 'before') {
 				$(targetElementForError).before(error);
+				$(targetElementForError).addClass(Validator.elementErrorClass);
 			} else if (attrValue[0] == 'after') {
 				$(targetElementForError).after(error);
+				$(targetElementForError).addClass(Validator.elementErrorClass);
+			} else if (attrValue[0] == 'prepend') {
+				$(targetElementForError).prepend(error);
+				$(element).addClass(Validator.elementErrorClass);
+			} else if (attrValue[0] == 'append') {
+				$(targetElementForError).append(error);
+				$(element).addClass(Validator.elementErrorClass);
 			}
-			$(targetElementForError).addClass(Validator.elementErrorClass);
-				
+
 			if ($(element).attr('data-match') != undefined) {
 				$('#' + $(element).attr('data-match')).addClass(Validator.elementErrorClass);
 			}
