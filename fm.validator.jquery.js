@@ -1,12 +1,12 @@
 /*
  Validator jQuery Plugin
  Validator is a JQuery validation plugin for forms.
- version 1.7, Jan 31th, 2014
+ version 1.9, Sep 5th, 2015
  by Ingi P. Jacobsen
 
  The MIT License (MIT)
 
- Copyright (c) 2014 Faroe Media
+ Copyright (c) 2013 Faroe Media
 
  Permission is hereby granted, free of charge, to any person obtaining a copy of
  this software and associated documentation files (the "Software"), to deal in
@@ -124,6 +124,12 @@ var Validator = {
 			}
 		}
 	},
+	patterns: {
+		url: /^((https?|ftp|mailto):(\/\/)?)?((([a-z\d]+)(\.|@|:|-))+[a-z]{2,}|((\d{1,3}\.){3}\d{1,3}))(\:\d+)?(\/[a-z\d_\-+~%.()]*)*(\?[a-z\d_\-+~%.,=;&{}/()]*)?(\#[a-z\d_\-+~%.,=;&{}/()]*)?$/i,
+		email: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i,
+		number: /^\s*(\+|-)?((\d+([\.,]\d+)?)|([\.,]\d+))%?\s*$/i,
+		digits: /^\s*\d+\s*$/
+	},
 	showError: function (element, text) {
 		if (!$(element).hasClass(Validator.elementErrorClass)) {
 			var error = document.createElement('div');
@@ -172,7 +178,6 @@ var Validator = {
 
 		$(form).find('input, select, textarea').each(function () {
 			if (!onlyVisible || $(this).is(':visible')) {
-				var regex = null;
 				// Input[type=text]
 				if ($(this).is('input') && ($(this).attr('type') == 'text' || $(this).attr('type') == undefined)) {
 					// required
@@ -200,29 +205,25 @@ var Validator = {
 					if ($(this).attr('data-type') != undefined) {
 						switch ($(this).attr('data-type')) {
 							case 'email':
-								regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-								if (!regex.test($(this).val()) && $(this).val() != '') {
+								if (!Validator.patterns.email.test($(this).val()) && $(this).val() != '') {
 									Validator.showError(this, Validator.languages[Validator.language].textbox.email);
 									hasErrors = true;
 								}
 								break;
 							case 'url':
-								regex = /^(https?:\/\/)?((([a-z\d]([a-z\d-]*[a-z\d])*)\.)+[a-z]{2,}|((\d{1,3}\.){3}\d{1,3}))(\:\d+)?(\/[-a-z\d%_.~+]*)*(\?[;&a-z\d%_{},.~+=-]*)?(\#[-a-z\d_]*)?$/i;
-								if ($(this).val().substr(0, 1) !== '/' && !regex.test($(this).val().replace('_', '')) && $(this).val() != '') {
+								if ($(this).val().substr(0, 1) !== '/' && !Validator.patterns.url.test($(this).val().replace('_', '')) && $(this).val() != '') {
 									Validator.showError(this, Validator.languages[Validator.language].textbox.url);
 									hasErrors = true;
 								}
 								break;
 							case 'number':
-								regex = /^\s*(\+|-)?((\d+([\.,]\d+)?)|([\.,]\d+))\s*$/;
-								if (!regex.test($(this).val()) && $(this).val() != '') {
+								if (!Validator.patterns.number.test($(this).val()) && $(this).val() != '') {
 									Validator.showError(this, Validator.languages[Validator.language].textbox.number);
 									hasErrors = true;
 								}
 								break;
 							case 'digits':
-								regex = /^\s*\d+\s*$/;
-								if (!regex.test($(this).val()) && $(this).val() != '') {
+								if (!Validator.patterns.digits.test($(this).val()) && $(this).val() != '') {
 									Validator.showError(this, Validator.languages[Validator.language].textbox.digits);
 									hasErrors = true;
 								}
@@ -319,8 +320,7 @@ var Validator = {
 					if ($(this).attr('data-type') != undefined) {
 						switch ($(this).attr('data-type')) {
 							case 'url':
-								regex = /^(https?:\/\/)?((([a-z\d]([a-z\d-]*[a-z\d])*)\.)+[a-z]{2,}|((\d{1,3}\.){3}\d{1,3}))(\:\d+)?(\/[-a-z\d%_.~+]*)*(\?[;&a-z\d%_{},.~+=-]*)?(\#[-a-z\d_]*)?$/i;
-								if (!regex.test($(this).val()) && $(this).val() != '') {
+								if (!Validator.patterns.url.test($(this).val()) && $(this).val() != '') {
 									Validator.showError(this, Validator.languages[Validator.language].textarea.url);
 									hasErrors = true;
 								}
