@@ -130,7 +130,7 @@ var Validator = {
 		number: /^\s*(\+|-)?((\d+([\.,]\d+)?)|([\.,]\d+))%?\s*$/i,
 		digits: /^\s*\d+\s*$/
 	},
-	showError: function (element, text) {
+	showError(element, text) {
 		if (!$(element).hasClass(Validator.elementErrorClass)) {
 			var error = document.createElement('div');
 			$(error).addClass('validator-error').html(text);
@@ -169,7 +169,7 @@ var Validator = {
 			}
 		}
 	},
-	validate: function (form, onlyVisible) {
+	validate(form, onlyVisible) {
 		var hasErrors = false;
 		var firstErrorElement = null;
 		onlyVisible = typeof onlyVisible !== 'undefined' ? onlyVisible : false;
@@ -338,7 +338,7 @@ var Validator = {
 		});
 		return !hasErrors;
 	},
-	removeErrors: function (form) {
+	removeErrors(form) {
 		// Remove all error text divs
 		$(form).find('.validator-error').each(function () {
 			$(this).remove();
@@ -359,7 +359,7 @@ var Validator = {
 	}
 };
 
-$(function () {
+$(() => {
 	$('form.validator').each(function () {
 		$(this).submit(function () {
 			return Validator.validate(this, false);
