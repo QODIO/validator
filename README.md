@@ -3,7 +3,7 @@ Validator
 
 Validator is a JQuery validation plugin for forms. It can validate text, textarea, password, checkbox and select elements.
 With these different elements Validator supports: required, dependency on checkbox, min/max length, email, number, digits and some positioning of error messages.
-[You can see a demo here](http://opensource.faroemedia.com/validator).
+[You can see a demo here](http://opensource.qodio.com/validator).
 
 
 Usage
@@ -183,7 +183,7 @@ Copyright and license
 ---------------------
 The MIT License (MIT)
 
-Copyright (c) 2014 Faroe Media
+Copyright (c) 2014 Qodio
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
