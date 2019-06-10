@@ -2,7 +2,7 @@
  Validator jQuery Plugin
  Validator is a JQuery validation plugin for forms.
  version 1.9, Sep 5th, 2015
- by Ingi P. Jacobsen
+ by Ingi á Steinamørk
 
  The MIT License (MIT)
 
