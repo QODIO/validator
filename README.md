@@ -1,3 +1,6 @@
+DEPRECATED - no longer actively maintained
+==========================================
+
 Validator
 =========
 
